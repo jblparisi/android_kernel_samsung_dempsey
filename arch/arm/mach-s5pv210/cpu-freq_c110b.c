@@ -802,7 +802,7 @@ static int s5pv210_cpufreq_resume(struct cpufreq_policy *policy)
 		pr_err("[%s:%d] clock speed does not match: "
 				"%d. Using L1 of 800MHz.\n",
 				__FILE__, __LINE__, rate);
-		level = L3;
+		level = L5;
 	}
 
 	memcpy(&s3c_freqs.old, &clk_info[level],
@@ -855,7 +855,7 @@ static int __init s5pv210_cpufreq_driver_init(struct cpufreq_policy *policy)
 		pr_err("[%s:%d] clock speed does not match: "
 				"%d. Using L1 of 800MHz.\n",
 				__FILE__, __LINE__, rate);
-		level = L3;
+		level = L5;
 	}
 
 	backup_dmc0_reg = __raw_readl(S5P_VA_DMC0 + 0x30) & 0xFFFF;
