@@ -94,7 +94,7 @@ static PVRSRV_ERROR EnableSGXClocks(void)
 {
 	regulator_enable(g3d_pd_regulator);
 	clk_enable(g3d_clock);
-	s5pv210_lock_dvfs_high_level(DVFS_LOCK_TOKEN_10, L3);
+	s5pv210_lock_dvfs_high_level(DVFS_LOCK_TOKEN_10, L5);
 	return PVRSRV_OK;
 }
 
