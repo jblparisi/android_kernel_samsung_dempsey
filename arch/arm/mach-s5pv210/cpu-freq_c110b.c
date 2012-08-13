@@ -988,24 +988,24 @@ late_initcall(s5pv210_cpufreq_init);
 
 /* sysfs interface for UV control */
 ssize_t show_UV_mV_table(struct cpufreq_policy *policy, char *buf) {
-	return sprintf(buf, "1200mhz: %lu mV\n800mhz: %lu mV\n400mhz: %lu mV\n200mhz: %lu mV\n100mhz: %lu mV\n", dvs_conf[0].arm_volt/1000, dvs_conf[1].arm_volt/1000, dvs_conf[2].arm_volt/1000, dvs_conf[3].arm_volt/1000, dvs_conf[4].arm_volt/1000);
+	return sprintf(buf, "1600mhz: %lu mV\n1400mhz: %lu mV\n1200mhz: %lu mV\n800mhz: %lu mV\n400mhz: %lu mV\n200mhz: %lu mV\n100mhz: %lu mV\n", dvs_conf[0].arm_volt/1000, dvs_conf[1].arm_volt/1000, dvs_conf[2].arm_volt/1000, dvs_conf[3].arm_volt/1000, dvs_conf[4].arm_volt/1000, dvs_conf[5].arm_volt/1000, dvs_conf[6].arm_volt/1000);
 }
 
 ssize_t store_UV_mV_table(struct cpufreq_policy *policy,
 				const char *buf, size_t count) {
 	unsigned int ret = -EINVAL;
-	int u[5];
+	int u[7];
 	int i = 0;
-	ret = sscanf(buf, "%d %d %d %d %d", &u[0], &u[1], &u[2], &u[3], &u[4]);
-	if(ret != 5) {
+	ret = sscanf(buf, "%d %d %d %d %d %d %d", &u[0], &u[1], &u[2], &u[3], &u[4], &u[5], &u[6]);
+	if(ret != 7) {
 		return -EINVAL;
 	}
 	else {
-		for( i = 0; i < 5; i++ ) {
+		for( i = 0; i < 7; i++ ) {
 			if (u[i] > CPU_UV_MV_MAX / 1000) u[i] = CPU_UV_MV_MAX / 1000;
 			else if (u[i] < CPU_UV_MV_MIN / 1000) u[i] = CPU_UV_MV_MIN / 1000;
 		}
-		for( i = 0; i < 5; i++ ) {
+		for( i = 0; i < 7; i++ ) {
 			dvs_conf[i].arm_volt = u[i] * 1000;
 		}
 		return count;
